@@ -1,12 +1,17 @@
 // @flow
 export type ListType = {
   id: string,
-  name: string,
-  disabled?: boolean,
+  title: string,
   items: Array<ItemType>
 };
 
 export type ItemType = {
   id: string,
-  content: string
+  picture: string,
+  age: number,
+  name: string,
+  gender: string,
+  email: string,
+  phone: string,
+  location: string
 };

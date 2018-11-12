@@ -1,46 +1,86 @@
 // @flow
-import React from "react";
+import React, { Fragment } from "react";
 import styled from "styled-components";
+import { Draggable } from "react-beautiful-dnd";
 import Card from "./Card";
 import { IconAdd } from "./Icons";
 
 import type { ListType } from "../Types";
 
 type PropTypes = {
-  data: ListType
+  data: ListType,
+  addCard: Function,
+  editCard: Function
 };
 
 const Container = styled.div`
   flex: 0 0 350px;
   width: 350px;
   margin-right: 40px;
+  background: #ffffff;
+  border: 1px solid #eff3f5;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px 0 rgba(79, 100, 128, 0.06),
+    0 6px 8px -6px rgba(79, 100, 128, 0.2);
 `;
 const Header = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  border-bottom: 1px solid #eff3f5;
 `;
 const Title = styled.div`
   font-size: 16px;
   font-weight: 500;
-  opacity: 0.4;
+  color: #879aaa;
 `;
-const AddCard = styled.div``;
+const Count = styled.div`
+  margin-left: 10px;
+  font-size: 16px;
+  color: #afbac3;
+`;
+const AddCard = styled.div`
+  margin-left: auto;
+  padding: 5px;
+  transition: 0.2s all;
+  opacity: 0.4;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
 const Items = styled.div``;
 
-const List = ({ data }: PropTypes) => {
-  const { id, name, disabled, items } = data;
+const List = ({ data, addCard, editCard }: PropTypes) => {
+  const { id, title, items } = data;
   return (
     <Container>
       <Header>
-        <Title>{name}</Title>
-        <AddCard>
-          <IconAdd style={{ opacity: 0.4 }} />
+        <Title>{title}</Title>
+        <Count>{items.length} persons</Count>
+        <AddCard onClick={() => addCard(id)}>
+          <IconAdd />
         </AddCard>
       </Header>
       <Items>
-        {items.map(item => (
-          <Card key={item.id} data={item} />
+        {items.map((item, i) => (
+          <Draggable key={item.id} draggableId={item.id} index={i}>
+            {(provided, snapshot) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+              >
+                <Card
+                  data={item}
+                  editCard={editCard}
+                  isDragging={snapshot.isDragging}
+                />
+              </div>
+            )}
+          </Draggable>
         ))}
       </Items>
     </Container>

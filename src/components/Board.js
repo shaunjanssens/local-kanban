@@ -1,11 +1,18 @@
 // @flow
 import React, { Component } from "react";
 import styled from "styled-components";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { getListIndex, reorder, move } from "../helpers/kanban";
 import List from "./List";
 
-import { data } from "../data";
+import type { ListType, ItemType } from "../Types";
+
+import { fakeData } from "../data";
 
 type PropTypes = {};
+type StateTypes = {
+  data: Array<ListType>
+};
 
 const Container = styled.div`
   position: relative;
@@ -15,7 +22,7 @@ const Container = styled.div`
   overflow-y: scroll;
   min-height: 100vh;
   padding: 50px 30px 30px;
-  background: #f6f6f6;
+  background: #fbfdfe;
 
   &::after {
     position: fixed;
@@ -34,14 +41,80 @@ const Container = styled.div`
   }
 `;
 
-export default class Board extends Component<PropTypes> {
+export default class Board extends Component<PropTypes, StateTypes> {
+  state = {
+    data: fakeData
+  };
+
+  getList = (id: string) => {
+    const { data } = this.state;
+    const list = data.find(list => list.id === id);
+
+    return list;
+  };
+
+  onDragEnd = (result: any) => {
+    const { source, destination } = result;
+    const { data: oldData } = this.state;
+
+    if (!destination) {
+      return;
+    }
+
+    if (source.droppableId === destination.droppableId) {
+      const data = reorder(
+        oldData,
+        this.getList(source.droppableId),
+        source.index,
+        destination.index
+      );
+
+      this.setState({ data });
+    } else {
+      const data = move(
+        oldData,
+        this.getList(source.droppableId),
+        this.getList(destination.droppableId),
+        source,
+        destination
+      );
+
+      this.setState({ data });
+    }
+  };
+
+  addCard = (id: string) => {
+    const { data } = this.state;
+    const index = getListIndex(data, id);
+
+    console.log("Add new item");
+  };
+
+  editCard = (data: ItemType) => {
+    console.log("Edit item");
+  };
+
   render = () => {
+    const { data } = this.state;
+
     return (
-      <Container>
-        {data.map(list => (
-          <List key={list.id} data={list} />
-        ))}
-      </Container>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Container>
+          {data.map(list => (
+            <Droppable key={list.id} droppableId={list.id}>
+              {(provided, snapshot) => (
+                <div ref={provided.innerRef}>
+                  <List
+                    data={list}
+                    addCard={this.addCard}
+                    editCard={this.editCard}
+                  />
+                </div>
+              )}
+            </Droppable>
+          ))}
+        </Container>
+      </DragDropContext>
     );
   };
 }

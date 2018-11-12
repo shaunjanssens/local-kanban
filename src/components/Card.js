@@ -1,32 +1,107 @@
 // @flow
-import React from "react";
+import React, { Component, Fragment } from "react";
 import styled from "styled-components";
+
+import { IconEdit } from "./Icons";
 
 import type { ItemType } from "../Types";
 
 type PropTypes = {
-  data: ItemType
+  data: ItemType,
+  editCard: Function,
+  isDragging: boolean
+};
+type StateTypes = {
+  edit: boolean
 };
 
 const Container = styled.div`
-  margin-bottom: 20px;
-  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
   background: #ffffff;
-  box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
+  border-bottom: 1px solid #eef3f5;
+
+  ${props => {
+    if (props.isDragging) {
+      return `
+        box-shadow: 0 2px 10px 0 rgba(79, 100, 128, 0.06),
+        0 6px 8px -6px rgba(79, 100, 128, 0.2);
+      `;
+    }
+  }};
+`;
+const Picture = styled.div`
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 50%;
+  background: url(${props => props.background}) no-repeat;
+  background-size: contain;
 `;
 const Content = styled.div`
-  font-size: 15px;
-  line-height: 1.66;
-  opacity: 0.6;
+  flex: 1;
+`;
+const Title = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+const Name = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  color: #879aaa;
+  margin-bottom: 8px;
+`;
+const Edit = styled.div`
+  padding: 5px;
+  transition: 0.2s all;
+  opacity: 0.4;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+const Meta = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+`;
+const MetaItem = styled.div`
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: 500;
+  color: #afbac3;
+  margin-right: 15px;
+
+  &:last-child {
+    margin-right: 0;
+  }
 `;
 
-const Card = ({ data }: PropTypes) => {
-  return (
-    <Container>
-      <Content>{data.content}</Content>
-    </Container>
-  );
-};
+export default class Card extends Component<PropTypes> {
+  render = () => {
+    const { data, isDragging } = this.props;
+    const { id, picture, age, name, gender, email, phone, location } = data;
 
-export default Card;
+    return (
+      <Container isDragging={isDragging}>
+        <Picture background={picture} />
+        <Content>
+          <Title>
+            <Name>{name}</Name>
+            <Edit>
+              <IconEdit />
+            </Edit>
+          </Title>
+          <Meta>
+            <MetaItem>{age} year old</MetaItem>
+            <MetaItem>{gender}</MetaItem>
+            <MetaItem>{location}</MetaItem>
+          </Meta>
+        </Content>
+      </Container>
+    );
+  };
+}

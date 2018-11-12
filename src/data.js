@@ -1,135 +1,351 @@
-export const data = [
+export const fakeData = [
   {
-    id: "5be956ed494b8964e127c65a",
-    name: "cupidatat officia",
+    id: "5be991a78c98a6c31fc313a6",
+    title: "Applied",
     items: [
       {
-        id: "5be958920d9b70751e5a410e",
-        content:
-          "minim voluptate labore fugiat id voluptate adipisicing et minim ut"
+        id: "5be990a46203e99d4c600a36",
+        picture: "http://placehold.it/100x100",
+        age: 21,
+        name: "Lupe Moreno",
+        gender: "female",
+        email: "lupemoreno@eventix.com",
+        phone: "+1 (819) 552-2420",
+        location: "Deputy"
       },
       {
-        id: "5be9589239eeb07bccb3b897",
-        content: "eu sint ullamco Lorem id incididunt cupidatat ea ipsum esse"
+        id: "5be990a41499a05a1542977a",
+        picture: "http://placehold.it/100x100",
+        age: 33,
+        name: "Susanne Singleton",
+        gender: "female",
+        email: "susannesingleton@eventix.com",
+        phone: "+1 (872) 548-2198",
+        location: "Winfred"
       },
       {
-        id: "5be95892939a2ac5cea37f2f",
-        content: "do sit ea do occaecat ex tempor id adipisicing ex"
+        id: "5be990a42aca9f31a88c831e",
+        picture: "http://placehold.it/100x100",
+        age: 32,
+        name: "Levine Waller",
+        gender: "male",
+        email: "levinewaller@eventix.com",
+        phone: "+1 (889) 490-2280",
+        location: "Canterwood"
       },
       {
-        id: "5be958928d6f30bad932ea93",
-        content:
-          "incididunt ipsum id amet consectetur deserunt amet dolor ea non"
+        id: "5be990a46d215fe34bce02cb",
+        picture: "http://placehold.it/100x100",
+        age: 21,
+        name: "Polly Wright",
+        gender: "female",
+        email: "pollywright@eventix.com",
+        phone: "+1 (921) 564-3927",
+        location: "Rushford"
       },
       {
-        id: "5be95892dbd7dc4bdcc0209d",
-        content:
-          "esse elit dolor exercitation cillum eu aute tempor amet cupidatat"
+        id: "5be990a422075f3fde6cf7f8",
+        picture: "http://placehold.it/100x100",
+        age: 27,
+        name: "Claudette Parker",
+        gender: "female",
+        email: "claudetteparker@eventix.com",
+        phone: "+1 (960) 560-3276",
+        location: "Roulette"
       },
       {
-        id: "5be9589216fcfdabbf8ac3f2",
-        content:
-          "pariatur officia labore deserunt aute commodo sunt ut labore est"
+        id: "5be990a4e197478b4dad76b3",
+        picture: "http://placehold.it/100x100",
+        age: 22,
+        name: "Leann Dominguez",
+        gender: "female",
+        email: "leanndominguez@eventix.com",
+        phone: "+1 (884) 582-3890",
+        location: "Klagetoh"
       },
       {
-        id: "5be9589271d5258fc95e817c",
-        content: "sunt ipsum proident qui culpa laborum culpa elit cupidatat ex"
+        id: "5be990a44125f0e3a83ae60c",
+        picture: "http://placehold.it/100x100",
+        age: 30,
+        name: "Alisha Mcleod",
+        gender: "female",
+        email: "alishamcleod@eventix.com",
+        phone: "+1 (850) 544-2585",
+        location: "Mulino"
       }
     ]
   },
   {
-    id: "5be956ed033a6662e9d14601",
-    name: "labore fugiat",
+    id: "5be991a75437126a6e337e81",
+    title: "Interview",
     items: [
       {
-        id: "5be958a52dc6e25700e1c40e",
-        content: "qui est nostrud officia anim amet sit et consectetur pariatur"
+        id: "5be990f70d05fe5565b4625e",
+        picture: "http://placehold.it/100x100",
+        age: 32,
+        name: "Shaw Petty",
+        gender: "male",
+        email: "shawpetty@eventix.com",
+        phone: "+1 (842) 536-3813",
+        location: "Baker"
       },
       {
-        id: "5be958a51c58a79ed138caa2",
-        content:
-          "duis voluptate esse elit adipisicing aute anim adipisicing commodo irure"
+        id: "5be990f72af11068a3cd5b08",
+        picture: "http://placehold.it/100x100",
+        age: 23,
+        name: "Jeanine Wynn",
+        gender: "female",
+        email: "jeaninewynn@eventix.com",
+        phone: "+1 (871) 441-2604",
+        location: "Bartley"
       },
       {
-        id: "5be958a50b5663e2aba763d8",
-        content:
-          "ullamco culpa enim magna incididunt eiusmod nulla et irure duis"
+        id: "5be990f7870f53409598e719",
+        picture: "http://placehold.it/100x100",
+        age: 35,
+        name: "Courtney Levy",
+        gender: "female",
+        email: "courtneylevy@eventix.com",
+        phone: "+1 (987) 428-3418",
+        location: "Chesterfield"
       },
       {
-        id: "5be958a5c7301ed7fab879ff",
-        content:
-          "id dolore irure consequat nostrud in officia enim incididunt aliqua"
+        id: "5be990f7311060336f9348ea",
+        picture: "http://placehold.it/100x100",
+        age: 24,
+        name: "Juanita Mcintosh",
+        gender: "female",
+        email: "juanitamcintosh@eventix.com",
+        phone: "+1 (886) 561-3162",
+        location: "Northchase"
+      },
+      {
+        id: "5be990f78fb9a7effd0a30be",
+        picture: "http://placehold.it/100x100",
+        age: 27,
+        name: "Winnie Mills",
+        gender: "female",
+        email: "winniemills@eventix.com",
+        phone: "+1 (916) 456-2328",
+        location: "Stevens"
       }
     ]
   },
   {
-    id: "5be956edb0f056af971a5ddc",
-    name: "dolor dolor",
+    id: "5be991a7fe3e679a812587fa",
+    title: "Second interview",
     items: [
       {
-        id: "5be958b2988737cab0b8d7ce",
-        content:
-          "sunt sit ad consequat excepteur magna deserunt fugiat aute dolore"
+        id: "5be991104163ece4e6f2d1b9",
+        picture: "http://placehold.it/100x100",
+        age: 33,
+        name: "Reynolds Hardy",
+        gender: "male",
+        email: "reynoldshardy@eventix.com",
+        phone: "+1 (947) 599-3627",
+        location: "Camas"
       },
       {
-        id: "5be958b21659f324ef4799e6",
-        content:
-          "enim consectetur nostrud ex ipsum cupidatat voluptate duis nulla cupidatat"
+        id: "5be9911049dd65528ff17fb5",
+        picture: "http://placehold.it/100x100",
+        age: 23,
+        name: "Karin Francis",
+        gender: "female",
+        email: "karinfrancis@eventix.com",
+        phone: "+1 (913) 589-3012",
+        location: "Rew"
       },
       {
-        id: "5be958b2d55d4035eeff2313",
-        content:
-          "enim exercitation velit laboris esse quis dolore est amet sunt"
+        id: "5be991104359413d76a50c52",
+        picture: "http://placehold.it/100x100",
+        age: 27,
+        name: "Trudy Charles",
+        gender: "female",
+        email: "trudycharles@eventix.com",
+        phone: "+1 (968) 429-2906",
+        location: "Shindler"
       },
       {
-        id: "5be958b203a2fc546e51b6e5",
-        content: "irure culpa culpa fugiat exercitation et duis nisi anim nulla"
-      },
-      {
-        id: "5be958b2334d0f1cabadda53",
-        content:
-          "pariatur elit velit nulla culpa ut incididunt sint mollit enim"
-      },
-      {
-        id: "5be958b26b369a6e3f98a35b",
-        content:
-          "nisi proident eiusmod aliqua ea ut sint eiusmod Lorem adipisicing"
+        id: "5be99110b720c6feb32a92d3",
+        picture: "http://placehold.it/100x100",
+        age: 39,
+        name: "Leta Nichols",
+        gender: "female",
+        email: "letanichols@eventix.com",
+        phone: "+1 (935) 477-2885",
+        location: "Keyport"
       }
     ]
   },
   {
-    id: "5be956edc90c9059fc3026d3",
-    name: "aute elit",
-    disabled: true,
+    id: "5be991a75b734f06a8d52af4",
+    title: "Rejected",
     items: [
       {
-        id: "5be958bb5169285ce5f7e5b2",
-        content: "magna aliqua ut laborum sint officia do deserunt ex officia"
+        id: "5be9912bfea86d88bb1efb9b",
+        picture: "http://placehold.it/100x100",
+        age: 25,
+        name: "Kramer Whitley",
+        gender: "male",
+        email: "kramerwhitley@eventix.com",
+        phone: "+1 (828) 502-2185",
+        location: "Glidden"
       },
       {
-        id: "5be958bbb350793e57a3dd98",
-        content:
-          "et quis excepteur minim aliquip duis elit consectetur veniam magna"
+        id: "5be9912bafd2cafc08d7fc10",
+        picture: "http://placehold.it/100x100",
+        age: 29,
+        name: "Jerry Duncan",
+        gender: "female",
+        email: "jerryduncan@eventix.com",
+        phone: "+1 (947) 482-2821",
+        location: "National"
       },
       {
-        id: "5be958bb1732830ebba88142",
-        content:
-          "qui dolor dolor voluptate veniam amet occaecat laborum sit officia"
+        id: "5be9912b9379243afde57724",
+        picture: "http://placehold.it/100x100",
+        age: 23,
+        name: "Lottie Webb",
+        gender: "female",
+        email: "lottiewebb@eventix.com",
+        phone: "+1 (879) 488-2889",
+        location: "Yukon"
       },
       {
-        id: "5be958bb69343f9422edb988",
-        content:
-          "ea deserunt dolore commodo cupidatat esse adipisicing pariatur ex amet"
+        id: "5be9912bb8aa72e0f2480c97",
+        picture: "http://placehold.it/100x100",
+        age: 22,
+        name: "Garrison Chambers",
+        gender: "male",
+        email: "garrisonchambers@eventix.com",
+        phone: "+1 (828) 444-2696",
+        location: "Garfield"
       },
       {
-        id: "5be958bb9428ac8f10f415f5",
-        content:
-          "ipsum amet et sit exercitation ullamco ut labore aliquip consequat"
+        id: "5be9912bcfe83e3a57f63369",
+        picture: "http://placehold.it/100x100",
+        age: 29,
+        name: "Rosario Nielsen",
+        gender: "male",
+        email: "rosarionielsen@eventix.com",
+        phone: "+1 (996) 450-2803",
+        location: "Gila"
       },
       {
-        id: "5be958bbf7b9d58f64bf92f3",
-        content:
-          "quis consequat ullamco deserunt irure consectetur officia incididunt anim adipisicing"
+        id: "5be9912b2810d0fd82b12eaa",
+        picture: "http://placehold.it/100x100",
+        age: 31,
+        name: "Krystal Herman",
+        gender: "female",
+        email: "krystalherman@eventix.com",
+        phone: "+1 (952) 529-2001",
+        location: "Chapin"
+      }
+    ]
+  },
+  {
+    id: "5be991a72cb51c3d947079ce",
+    title: "Hired",
+    items: [
+      {
+        id: "5be991580652fee5ab955b1a",
+        picture: "http://placehold.it/100x100",
+        age: 40,
+        name: "Reese Patrick",
+        gender: "male",
+        email: "reesepatrick@eventix.com",
+        phone: "+1 (972) 513-3308",
+        location: "Winchester"
+      },
+      {
+        id: "5be99158bb95275ad8758535",
+        picture: "http://placehold.it/100x100",
+        age: 32,
+        name: "Doreen Rojas",
+        gender: "female",
+        email: "doreenrojas@eventix.com",
+        phone: "+1 (909) 473-3977",
+        location: "Glendale"
+      },
+      {
+        id: "5be991580549f8523c6dec5e",
+        picture: "http://placehold.it/100x100",
+        age: 21,
+        name: "Beck Dixon",
+        gender: "male",
+        email: "beckdixon@eventix.com",
+        phone: "+1 (826) 524-3429",
+        location: "Hachita"
+      },
+      {
+        id: "5be9915837f0db4e146a2500",
+        picture: "http://placehold.it/100x100",
+        age: 27,
+        name: "Flynn Lucas",
+        gender: "male",
+        email: "flynnlucas@eventix.com",
+        phone: "+1 (891) 497-3080",
+        location: "Why"
+      },
+      {
+        id: "5be99158ae8bc0085c07b4fa",
+        picture: "http://placehold.it/100x100",
+        age: 32,
+        name: "Rachel Langley",
+        gender: "female",
+        email: "rachellangley@eventix.com",
+        phone: "+1 (828) 452-2829",
+        location: "Soudan"
+      },
+      {
+        id: "5be9915825e9c65e9afcbd61",
+        picture: "http://placehold.it/100x100",
+        age: 23,
+        name: "Ochoa Hayden",
+        gender: "male",
+        email: "ochoahayden@eventix.com",
+        phone: "+1 (837) 428-2967",
+        location: "Stollings"
+      },
+      {
+        id: "5be991582f70d8bf809b0fb0",
+        picture: "http://placehold.it/100x100",
+        age: 27,
+        name: "Ruth Humphrey",
+        gender: "female",
+        email: "ruthhumphrey@eventix.com",
+        phone: "+1 (856) 487-2401",
+        location: "Orovada"
+      },
+      {
+        id: "5be99158eaaa052a50fb3699",
+        picture: "http://placehold.it/100x100",
+        age: 27,
+        name: "Shirley Mckay",
+        gender: "female",
+        email: "shirleymckay@eventix.com",
+        phone: "+1 (969) 482-2619",
+        location: "Convent"
+      },
+      {
+        id: "5be9915834ad2a9350a51499",
+        picture: "http://placehold.it/100x100",
+        age: 30,
+        name: "Norman Pollard",
+        gender: "male",
+        email: "normanpollard@eventix.com",
+        phone: "+1 (881) 566-2474",
+        location: "National"
+      },
+      {
+        id: "5be9915830e4a8af48443b98",
+        picture: "http://placehold.it/100x100",
+        age: 29,
+        name: "Leslie Yang",
+        gender: "female",
+        email: "leslieyang@eventix.com",
+        phone: "+1 (845) 588-3969",
+        location: "Homestead"
       }
     ]
   }
