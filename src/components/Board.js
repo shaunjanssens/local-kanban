@@ -64,11 +64,6 @@ export default class Board extends Component<PropTypes, StateTypes> {
 
   componentWillMount = () => {
     this.setState({ data: this.getData() });
-    document.body.style.backgroundColor = "#f0f5f7";
-  };
-
-  componentWillUnmount = () => {
-    document.body.style.backgroundColor = null;
   };
 
   getData = () => {
