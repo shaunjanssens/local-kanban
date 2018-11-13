@@ -1,9 +1,18 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import styled from "styled-components";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { getListIndex, reorder, move } from "../helpers/kanban";
+import {
+  getListIndex,
+  getCardIndex,
+  getList,
+  reorder,
+  move
+} from "../helpers/kanban";
+import { isPositiveNumber } from "../helpers/number";
+import { randomId } from "../helpers/random";
 import List from "./List";
+import EditCard from "./EditCard";
 
 import type { ListType, ItemType } from "../Types";
 
@@ -11,7 +20,11 @@ import { fakeData } from "../data";
 
 type PropTypes = {};
 type StateTypes = {
-  data: Array<ListType>
+  data: Array<ListType>,
+  showModal: boolean,
+  editListId: string,
+  editCardId: string,
+  editData: ?ItemType
 };
 
 const Container = styled.div`
@@ -21,36 +34,52 @@ const Container = styled.div`
   flex-wrap: nowrap;
   overflow-y: scroll;
   min-height: 100vh;
-  padding: 50px 30px 30px;
-  background: #fbfdfe;
+  padding: 50px 40px 30px;
 
   &::after {
     position: fixed;
     content: "";
     display: block;
-    width: 120px;
+    width: 40px;
     height: 100vh;
     right: 0;
     top: 0;
     z-index: 10;
     background: linear-gradient(
       to left,
-      rgba(246, 246, 246, 1),
-      rgba(246, 246, 246, 0)
+      rgba(251, 253, 254, 1),
+      rgba(251, 253, 254, 0)
     );
   }
 `;
 
 export default class Board extends Component<PropTypes, StateTypes> {
   state = {
-    data: fakeData
+    data: [],
+    showModal: false,
+    editListId: "",
+    editCardId: "",
+    editData: null
   };
 
-  getList = (id: string) => {
-    const { data } = this.state;
-    const list = data.find(list => list.id === id);
+  componentWillMount = () => {
+    this.setState({ data: this.getData() });
+    document.body.style.backgroundColor = "#f0f5f7";
+  };
 
-    return list;
+  componentWillUnmount = () => {
+    document.body.style.backgroundColor = null;
+  };
+
+  getData = () => {
+    const localData = localStorage.getItem("board");
+    return localData ? JSON.parse(localData) : fakeData;
+  };
+
+  saveDataToLocalstorage = (data: Array<ListType>) => {
+    if (typeof Storage !== "undefined") {
+      localStorage.setItem("board", JSON.stringify(data));
+    }
   };
 
   onDragEnd = (result: any) => {
@@ -62,59 +91,120 @@ export default class Board extends Component<PropTypes, StateTypes> {
     }
 
     if (source.droppableId === destination.droppableId) {
-      const data = reorder(
-        oldData,
-        this.getList(source.droppableId),
-        source.index,
-        destination.index
-      );
+      const list = getList(oldData, source.droppableId);
+      if (list) {
+        const data = reorder(oldData, list, source.index, destination.index);
 
-      this.setState({ data });
+        this.setState({ data });
+        this.saveDataToLocalstorage(data);
+      }
     } else {
-      const data = move(
-        oldData,
-        this.getList(source.droppableId),
-        this.getList(destination.droppableId),
-        source,
-        destination
-      );
+      const sourceList = getList(oldData, source.droppableId);
+      const destinationList = getList(oldData, destination.droppableId);
 
-      this.setState({ data });
+      if (sourceList && destinationList) {
+        const data = move(
+          oldData,
+          getList(oldData, source.droppableId),
+          getList(oldData, destination.droppableId),
+          source,
+          destination
+        );
+
+        this.setState({ data });
+        this.saveDataToLocalstorage(data);
+      }
     }
   };
 
-  addCard = (id: string) => {
-    const { data } = this.state;
-    const index = getListIndex(data, id);
-
-    console.log("Add new item");
+  toggleModal = () => {
+    this.setState({ showModal: !this.state.showModal });
   };
 
-  editCard = (data: ItemType) => {
-    console.log("Edit item");
+  addContact = (editListId: string) => {
+    this.setState({ editListId }, () => {
+      this.toggleModal();
+    });
+  };
+
+  editContact = (
+    editListId: string,
+    editCardId: string,
+    editData: ItemType
+  ) => {
+    this.setState({ editListId, editCardId, editData }, () => {
+      this.toggleModal();
+    });
+  };
+
+  saveContact = (contact: ItemType) => {
+    const { editListId, editCardId } = this.state;
+    let { data } = this.state;
+
+    if (!editListId && !editCardId) {
+      return;
+    }
+
+    const listIndex = getListIndex(data, editListId);
+    const cardIndex = getCardIndex(data[listIndex].items, editCardId);
+
+    if (isPositiveNumber(listIndex) && !isPositiveNumber(cardIndex)) {
+      data[listIndex].items.push({
+        ...contact,
+        id: randomId(),
+        lastUpdated: new Date().toString(),
+        picture: "https://placeimg.com/100/100/people"
+      });
+    } else if (isPositiveNumber(listIndex) && isPositiveNumber(cardIndex)) {
+      data[listIndex].items[cardIndex] = {
+        ...contact,
+        lastUpdated: new Date().toString()
+      };
+    }
+
+    this.setState(
+      { data, editData: null, editCardId: "", editListId: "" },
+      () => {
+        this.toggleModal();
+        this.saveDataToLocalstorage(data);
+      }
+    );
   };
 
   render = () => {
-    const { data } = this.state;
+    const { data, showModal, editData } = this.state;
 
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Container>
-          {data.map(list => (
-            <Droppable key={list.id} droppableId={list.id}>
-              {(provided, snapshot) => (
-                <div ref={provided.innerRef}>
-                  <List
-                    data={list}
-                    addCard={this.addCard}
-                    editCard={this.editCard}
-                  />
-                </div>
-              )}
-            </Droppable>
-          ))}
-        </Container>
-      </DragDropContext>
-    );
+    if (data.length > 0) {
+      return (
+        <Fragment>
+          {showModal && (
+            <EditCard
+              initialData={editData}
+              toggleModal={this.toggleModal}
+              saveContact={this.saveContact}
+            />
+          )}
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            <Container>
+              {data.map(list => (
+                <Droppable key={list.id} droppableId={list.id}>
+                  {(provided, snapshot) => (
+                    <div ref={provided.innerRef}>
+                      <List
+                        data={list}
+                        addContact={this.addContact}
+                        editContact={this.editContact}
+                      />
+                    </div>
+                  )}
+                </Droppable>
+              ))}
+            </Container>
+          </DragDropContext>
+        </Fragment>
+      );
+    } else {
+      return null;
+    }
   };
 }

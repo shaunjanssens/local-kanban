@@ -8,10 +8,17 @@ export type ListType = {
 export type ItemType = {
   id: string,
   picture: string,
-  age: number,
+  age: string,
   name: string,
   gender: string,
   email: string,
   phone: string,
-  location: string
+  location: string,
+  notes: string,
+  lastUpdated: string
+};
+
+export type dndResultType = {
+  droppableId: string,
+  index: number
 };

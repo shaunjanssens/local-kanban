@@ -1,5 +1,5 @@
 // @flow
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 
 import { IconEdit } from "./Icons";
@@ -8,12 +8,11 @@ import type { ItemType } from "../Types";
 
 type PropTypes = {
   data: ItemType,
-  editCard: Function,
-  isDragging: boolean
+  isDragging: boolean,
+  editContact: Function,
+  listId: string
 };
-type StateTypes = {
-  edit: boolean
-};
+type StateTypes = {};
 
 const Container = styled.div`
   display: flex;
@@ -80,10 +79,10 @@ const MetaItem = styled.div`
   }
 `;
 
-export default class Card extends Component<PropTypes> {
+export default class Card extends Component<PropTypes, StateTypes> {
   render = () => {
-    const { data, isDragging } = this.props;
-    const { id, picture, age, name, gender, email, phone, location } = data;
+    const { data, isDragging, editContact, listId } = this.props;
+    const { id, picture, age, name, gender, location } = data;
 
     return (
       <Container isDragging={isDragging}>
@@ -91,14 +90,14 @@ export default class Card extends Component<PropTypes> {
         <Content>
           <Title>
             <Name>{name}</Name>
-            <Edit>
+            <Edit onClick={() => editContact(listId, id, data)}>
               <IconEdit />
             </Edit>
           </Title>
           <Meta>
-            <MetaItem>{age} year old</MetaItem>
-            <MetaItem>{gender}</MetaItem>
-            <MetaItem>{location}</MetaItem>
+            {age && <MetaItem>{age} year old</MetaItem>}
+            {gender && <MetaItem>{gender}</MetaItem>}
+            {location && <MetaItem>{location}</MetaItem>}
           </Meta>
         </Content>
       </Container>

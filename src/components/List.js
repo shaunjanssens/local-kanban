@@ -1,5 +1,5 @@
 // @flow
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Draggable } from "react-beautiful-dnd";
 import Card from "./Card";
@@ -9,8 +9,8 @@ import type { ListType } from "../Types";
 
 type PropTypes = {
   data: ListType,
-  addCard: Function,
-  editCard: Function
+  addContact: Function,
+  editContact: Function
 };
 
 const Container = styled.div`
@@ -53,14 +53,14 @@ const AddCard = styled.div`
 `;
 const Items = styled.div``;
 
-const List = ({ data, addCard, editCard }: PropTypes) => {
+const List = ({ data, addContact, editContact }: PropTypes) => {
   const { id, title, items } = data;
   return (
     <Container>
       <Header>
         <Title>{title}</Title>
         <Count>{items.length} persons</Count>
-        <AddCard onClick={() => addCard(id)}>
+        <AddCard onClick={() => addContact(id)}>
           <IconAdd />
         </AddCard>
       </Header>
@@ -75,9 +75,11 @@ const List = ({ data, addCard, editCard }: PropTypes) => {
               >
                 <Card
                   data={item}
-                  editCard={editCard}
                   isDragging={snapshot.isDragging}
+                  editContact={editContact}
+                  listId={id}
                 />
+                {provided.placeholder}
               </div>
             )}
           </Draggable>
